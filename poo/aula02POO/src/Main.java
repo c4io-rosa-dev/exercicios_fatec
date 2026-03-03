@@ -57,6 +57,8 @@ public class Main {
         newAgenda.data = LocalDate.of(2026, 02, 22);
         newExame.descritivo = "Exame cardiológico";
 
+
+
         newPaciente.mostrar();
         doutor.mostrar();
         newRecepcionista.mostrar();

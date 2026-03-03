@@ -7,7 +7,17 @@ public class Exame {
     public LocalDate data;
     public String descritivo;
 
-    public Exame() {}
+    public Exame() {
+        consulta = new Consulta();
+        data = LocalDate.of(2026,02,22);
+        descritivo = "Rotina";
+    }
+
+    public Exame(Consulta consulta, LocalDate data, String descritivo) {
+        this.consulta = consulta;
+        this.data = data;
+        this.descritivo = descritivo;
+    }
 
     public void solicitar() {
 

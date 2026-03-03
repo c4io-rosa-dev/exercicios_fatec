@@ -11,7 +11,23 @@ public class Consulta {
     public String motivo;
     public String historico;
 
-    public Consulta() {}
+    public Consulta() {
+        data = LocalDate.of(2026,02,22);
+        hora = LocalTime.of(22,11);
+        medico = new Medico();
+        paciente = new Paciente();
+        motivo = "Rotina";
+        historico = "Sem informações";
+    }
+
+    public Consulta(LocalDate data, LocalTime hora, Medico medico, Paciente paciente, String motivo, String historico) {
+        this.data = data;
+        this.hora = hora;
+        this.medico = medico;
+        this.paciente = paciente;
+        this.motivo = motivo;
+        this.historico = historico;
+    }
 
     public void marcar() {
 

@@ -7,7 +7,21 @@ public class Paciente {
     public String genero;
     public int idade;
 
-    public Paciente() {}
+    public Paciente() {
+        nome = "Caio";
+        cpf = "544";
+        telefone = "11 951667716";
+        genero = "Masculino";
+        idade = 19;
+    }
+
+    public Paciente(String nome, String cpf, String telefone, String genero, int idade) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.genero = genero;
+        this.idade = idade;
+    }
 
     public void cadastrar() {
 

@@ -6,7 +6,19 @@ public class Recepcionista {
     public String telefone;
     public String senha;
 
-    public Recepcionista() {}
+    public Recepcionista() {
+        nome = "Samanta";
+        cpf = "544";
+        telefone = "11 951";
+        senha = "321";
+    }
+
+    public Recepcionista(String nome, String cpf, String telefone, String senha) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.senha = senha;
+    }
 
     public void acessar() {
 

@@ -9,7 +9,19 @@ public class Agenda {
     public Medico medico;
     public Paciente paciente;
 
-    public Agenda() {}
+    public Agenda() {
+        data = LocalDate.of(2026,02,22);
+        hora = LocalTime.of(22,30);
+        medico = new Medico();
+        paciente = new Paciente("Caio", "544", "11 951", "Masculino", 19);
+    }
+
+    public Agenda(LocalDate data, LocalTime hora, Medico medico, Paciente paciente) {
+        this.data = data;
+        this.hora = hora;
+        this.medico = medico;
+        this.paciente = paciente;
+    }
 
     public void consultar() {
 
