@@ -56,11 +56,23 @@ public class Medico {
     }
 
     public Medico (String nome, String crm, String telefone, String especialidade, String senha) {
-        this.nome = nome;
-        this.crm = crm;
-        this.telefone = telefone;
-        this.especialidade = especialidade;
-        this.senha = senha;
+        try {
+            if (nome == null || crm == null || telefone == null || especialidade == null || senha == null) {
+                throw new Exception("Dados inválidos");
+            }
+            this.nome = nome;
+            this.crm = crm;
+            this.telefone = telefone;
+            this.especialidade = especialidade;
+            this.senha = senha;
+        } catch (Exception e) {
+            System.out.println("Ocorreu uma exceção - Valores padrões definidos");
+            this.nome = null;
+            this.crm = null;
+            this.telefone = null;
+            this.especialidade = null;
+            this.senha = null;
+        }
     }
 
     public void acessar() {

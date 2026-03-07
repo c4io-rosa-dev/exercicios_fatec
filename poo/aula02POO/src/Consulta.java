@@ -69,12 +69,25 @@ public class Consulta {
     }
 
     public Consulta(LocalDate data, LocalTime hora, Medico medico, Paciente paciente, String motivo, String historico) {
-        this.data = data;
-        this.hora = hora;
-        this.medico = medico;
-        this.paciente = paciente;
-        this.motivo = motivo;
-        this.historico = historico;
+        try {
+            if (data == null || hora == null || medico == null || paciente == null || motivo == null || historico == null) {
+                throw new Exception("Dados inválidos");
+            }
+            this.data = data;
+            this.hora = hora;
+            this.medico = medico;
+            this.paciente = paciente;
+            this.motivo = motivo;
+            this.historico = historico;
+        } catch (Exception e) {
+            System.out.println("Ocorreu uma exceção - Valores padrão definidos");
+            this.data = null;
+            this.hora = null;
+            this.medico = null;
+            this.paciente = null;
+            this.motivo = null;
+            this.historico = null;
+        }
     }
 
     public void marcar() {

@@ -14,9 +14,19 @@ public class Receita {
     }
 
     public Receita (Consulta consulta, LocalDate data, String descritivo) {
-        this.consulta = consulta;
-        this.data = data;
-        this.descritivo = descritivo;
+        try {
+            if (consulta == null || data == null || descritivo == null) {
+                throw new Exception("Dados inválidos");
+            }
+            this.consulta = consulta;
+            this.data = data;
+            this.descritivo = descritivo;
+        } catch (Exception e) {
+            System.out.println("Ocorreu uma exceção - Valores padrões inválidos");
+            this.consulta == null;
+            this.data == null;
+            this.descritivo == null;
+        }
     }
 
     public Consulta getConsulta() {

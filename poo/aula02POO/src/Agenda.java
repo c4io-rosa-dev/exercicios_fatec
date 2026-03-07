@@ -37,7 +37,12 @@ public class Agenda {
     }
 
     public void setMedico(Medico medico) {
-        this.medico = medico;
+        try {
+            this.medico = medico;
+        } catch (Exception e) {
+            this.medico = null;
+            System.out.println("Ocorreu uma exceção - Valores padrões definidos");
+        }
     }
 
     public Paciente getPaciente() {
@@ -49,10 +54,21 @@ public class Agenda {
     }
 
     public Agenda(LocalDate data, LocalTime hora, Medico medico, Paciente paciente) {
-        this.data = data;
-        this.hora = hora;
-        this.medico = medico;
-        this.paciente = paciente;
+        try {
+            if (data == null || hora == null || medico == null || paciente == null) {
+                throw new Exception("Dados inválidos");
+            }
+            this.data = data;
+            this.hora = hora;
+            this.medico = medico;
+            this.paciente = paciente;
+        } catch(Exception e) {
+            System.out.println("Ocorreu uma exceção - Valores padrões definidos");
+            this.data = null;
+            this.hora = null;
+            this.medico = null;
+            this.paciente = null;
+        }
     }
 
     public void consultar() {

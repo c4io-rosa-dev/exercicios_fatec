@@ -16,11 +16,22 @@ public class Paciente {
     }
 
     public Paciente(String nome, String cpf, String telefone, String genero, int idade) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.genero = genero;
-        this.idade = idade;
+        try {
+            if (nome == null || cpf == null || telefone == null || genero == null) {
+                throw new Exception("Dados inválidos");
+            }
+            this.nome = nome;
+            this.cpf = cpf;
+            this.telefone = telefone;
+            this.genero = genero;
+            this.idade = idade;
+        } catch (Exception e) {
+            System.out.println("Ocorreu uma exceção - Valores padrões definidos");
+            this.nome = null;
+            this.cpf = null;
+            this.telefone = null;
+            this.genero = null;
+        }
     }
 
     public void cadastrar() {

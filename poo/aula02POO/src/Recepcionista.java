@@ -14,10 +14,21 @@ public class Recepcionista {
     }
 
     public Recepcionista(String nome, String cpf, String telefone, String senha) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.senha = senha;
+        try {
+            if (nome == null || cpf == null || telefone == null || senha == null) {
+                throw new Exception("Dados inválidos");
+            }
+            this.nome = nome;
+            this.cpf = cpf;
+            this.telefone = telefone;
+            this.senha = senha;
+        } catch (Exception e) {
+            System.out.println("Ocorreu uma exceção - Valores padrões definidos");
+            this.nome = null;
+            this.cpf = null;
+            this.telefone = null;
+            this.senha = null;
+        }
     }
 
     public String getNome() {
