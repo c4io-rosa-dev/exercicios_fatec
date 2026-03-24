@@ -2,30 +2,25 @@ package br.com.src;
 
 import java.time.LocalDate;
 
-public class Receita {
+public class Receita extends Procedimento {
+    // Atributo específico (data e descritivo são herdados de Procedimento)
     public Consulta consulta;
-    public LocalDate data;
-    public String descritivo;
 
     public Receita() {
+        super(LocalDate.of(2026, 02, 22), "Dipirona básica");
         consulta = new Consulta();
-        data = LocalDate.of(2026,02,22);
-        descritivo = "Dipirona básica";
     }
 
-    public Receita (Consulta consulta, LocalDate data, String descritivo) {
+    public Receita(Consulta consulta, LocalDate data, String descritivo) {
+        super(data, descritivo);
         try {
-            if (consulta == null || data == null || descritivo == null) {
+            if (consulta == null) {
                 throw new Exception("Dados inválidos");
             }
             this.consulta = consulta;
-            this.data = data;
-            this.descritivo = descritivo;
         } catch (Exception e) {
-            System.out.println("Ocorreu uma exceção - Valores padrões inválidos");
-            this.consulta == null;
-            this.data == null;
-            this.descritivo == null;
+            System.out.println("Ocorreu uma exceção - Valores padrões definidos");
+            this.consulta = null;
         }
     }
 
@@ -37,33 +32,15 @@ public class Receita {
         this.consulta = consulta;
     }
 
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    public String getDescritivo() {
-        return descritivo;
-    }
-
-    public void setDescritivo(String descritivo) {
-        this.descritivo = descritivo;
-    }
+    // consultar() é herdado de Procedimento
 
     public void preescrever() {
-
+        System.out.println("Receita prescrita em " + data + ": " + descritivo);
     }
 
-    public void consultar() {
-
-    }
-
+    @Override
     void mostrar() {
         System.out.println("Consulta: " + consulta);
-        System.out.println("Data: " + data);
-        System.out.println("Descrição: " + descritivo);
+        super.mostrar();
     }
 }

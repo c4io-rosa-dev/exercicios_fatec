@@ -14,7 +14,7 @@ public class Main {
         newPaciente.genero = "Masculino";
         newPaciente.idade = 19;
 
-        // Médico
+        // Médico (agora herda nome, telefone e senha de Funcionario)
         Medico doutor = new Medico();
         doutor.nome = "Cleber";
         doutor.crm = "666";
@@ -22,7 +22,7 @@ public class Main {
         doutor.especialidade = "Cardiologia";
         doutor.senha = "123";
 
-        // Recepcionista
+        // Recepcionista (agora herda nome, telefone e senha de Funcionario)
         Recepcionista newRecepcionista = new Recepcionista();
         newRecepcionista.nome = "Claúdia";
         newRecepcionista.cpf = "123456789-00";
@@ -38,33 +38,67 @@ public class Main {
 
         // Consulta
         Consulta newConsulta = new Consulta();
-        newAgenda.data = LocalDate.of(2026, 2, 22);
-        newAgenda.hora = LocalTime.of(15, 40, 0);
+        newConsulta.data = LocalDate.of(2026, 2, 22);
+        newConsulta.hora = LocalTime.of(15, 40, 0);
         newConsulta.medico = doutor;
         newConsulta.paciente = newPaciente;
         newConsulta.motivo = "rotina";
         newConsulta.historico = "Novo histórico";
 
-        // Receita
+        // Receita (agora herda data e descritivo de Procedimento)
         Receita newReceita = new Receita();
         newReceita.consulta = newConsulta;
-        newAgenda.data = LocalDate.of(2026, 02, 22);
+        newReceita.data = LocalDate.of(2026, 02, 22);
         newReceita.descritivo = "Receita para remédio X";
 
-        // Exame
+        // Exame (agora herda data e descritivo de Procedimento)
         Exame newExame = new Exame();
         newExame.consulta = newConsulta;
-        newAgenda.data = LocalDate.of(2026, 02, 22);
+        newExame.data = LocalDate.of(2026, 02, 22);
         newExame.descritivo = "Exame cardiológico";
 
-
-
+        System.out.println("========== DADOS ==========");
+        System.out.println("\n--- Paciente ---");
         newPaciente.mostrar();
+        System.out.println("\n--- Médico ---");
         doutor.mostrar();
+        System.out.println("\n--- Recepcionista ---");
         newRecepcionista.mostrar();
+        System.out.println("\n--- Agenda ---");
         newAgenda.mostrar();
+        System.out.println("\n--- Consulta ---");
         newConsulta.mostrar();
+        System.out.println("\n--- Receita ---");
         newReceita.mostrar();
+        System.out.println("\n--- Exame ---");
         newExame.mostrar();
+
+        // ========== DEMONSTRAÇÃO DE HERANÇA ==========
+        System.out.println("\n========== HERANÇA: Funcionario ==========");
+        System.out.println("Medico é Funcionario? " + (doutor instanceof Funcionario));
+        System.out.println("Recepcionista é Funcionario? " + (newRecepcionista instanceof Funcionario));
+
+        // Polimorfismo: tratar ambos como Funcionario
+        Funcionario func1 = doutor;
+        Funcionario func2 = newRecepcionista;
+        System.out.println("\nAcessando via referência Funcionario:");
+        func1.acessar();
+        func2.acessar();
+
+        System.out.println("\n========== HERANÇA: Procedimento ==========");
+        System.out.println("Receita é Procedimento? " + (newReceita instanceof Procedimento));
+        System.out.println("Exame é Procedimento? " + (newExame instanceof Procedimento));
+
+        // Polimorfismo: tratar ambos como Procedimento
+        Procedimento proc1 = newReceita;
+        Procedimento proc2 = newExame;
+        System.out.println("\nConsultando via referência Procedimento:");
+        proc1.consultar();
+        proc2.consultar();
+
+        // Métodos específicos das subclasses
+        System.out.println("\nMétodos específicos:");
+        newReceita.preescrever();
+        newExame.solicitar();
     }
 }

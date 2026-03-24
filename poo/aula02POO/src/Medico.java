@@ -1,26 +1,29 @@
 package br.com.src;
 
-public class Medico {
-    public String nome;
+public class Medico extends Funcionario {
+    // Atributos específicos (nome, telefone e senha são herdados de Funcionario)
     public String crm;
-    public String telefone;
     public String especialidade;
-    public String senha;
 
     public Medico() {
-        nome = "Doutor";
+        super("Doutor", "11 951", "123");
         crm = "344";
-        telefone = "11 951";
         especialidade = "Cardiologia";
-        senha = "123";
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Medico(String nome, String crm, String telefone, String especialidade, String senha) {
+        super(nome, telefone, senha);
+        try {
+            if (crm == null || especialidade == null) {
+                throw new Exception("Dados inválidos");
+            }
+            this.crm = crm;
+            this.especialidade = especialidade;
+        } catch (Exception e) {
+            System.out.println("Ocorreu uma exceção - Valores padrões definidos");
+            this.crm = null;
+            this.especialidade = null;
+        }
     }
 
     public String getCrm() {
@@ -31,14 +34,6 @@ public class Medico {
         this.crm = crm;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
     public String getEspecialidade() {
         return especialidade;
     }
@@ -47,43 +42,12 @@ public class Medico {
         this.especialidade = especialidade;
     }
 
-    public String getSenha() {
-        return senha;
-    }
+    // acessar() é herdado de Funcionario
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public Medico (String nome, String crm, String telefone, String especialidade, String senha) {
-        try {
-            if (nome == null || crm == null || telefone == null || especialidade == null || senha == null) {
-                throw new Exception("Dados inválidos");
-            }
-            this.nome = nome;
-            this.crm = crm;
-            this.telefone = telefone;
-            this.especialidade = especialidade;
-            this.senha = senha;
-        } catch (Exception e) {
-            System.out.println("Ocorreu uma exceção - Valores padrões definidos");
-            this.nome = null;
-            this.crm = null;
-            this.telefone = null;
-            this.especialidade = null;
-            this.senha = null;
-        }
-    }
-
-    public void acessar() {
-
-    }
-
+    @Override
     void mostrar() {
-        System.out.println("Nome: " + nome);
+        super.mostrar();
         System.out.println("CRM: " + crm);
-        System.out.println("Telefone: " + telefone);
         System.out.println("Especialidade: " + especialidade);
-        System.out.println("Senha: " + senha);
     }
 }

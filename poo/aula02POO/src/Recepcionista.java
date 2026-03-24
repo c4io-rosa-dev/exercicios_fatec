@@ -1,42 +1,25 @@
 package br.com.src;
 
-public class Recepcionista {
-    public String nome;
+public class Recepcionista extends Funcionario {
+    // Atributo específico (nome, telefone e senha são herdados de Funcionario)
     public String cpf;
-    public String telefone;
-    public String senha;
 
     public Recepcionista() {
-        nome = "Samanta";
+        super("Samanta", "11 951", "321");
         cpf = "544";
-        telefone = "11 951";
-        senha = "321";
     }
 
     public Recepcionista(String nome, String cpf, String telefone, String senha) {
+        super(nome, telefone, senha);
         try {
-            if (nome == null || cpf == null || telefone == null || senha == null) {
+            if (cpf == null) {
                 throw new Exception("Dados inválidos");
             }
-            this.nome = nome;
             this.cpf = cpf;
-            this.telefone = telefone;
-            this.senha = senha;
         } catch (Exception e) {
             System.out.println("Ocorreu uma exceção - Valores padrões definidos");
-            this.nome = null;
             this.cpf = null;
-            this.telefone = null;
-            this.senha = null;
         }
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getCpf() {
@@ -47,30 +30,11 @@ public class Recepcionista {
         this.cpf = cpf;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
+    // acessar() é herdado de Funcionario
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public void acessar() {
-
-    }
-
-    void mostrar () {
-        System.out.println("Nome: " + nome);
+    @Override
+    void mostrar() {
+        super.mostrar();
         System.out.println("CPF: " + cpf);
-        System.out.println("Telefone: " + nome);
-        System.out.println("Senha: " + senha);
     }
 }
