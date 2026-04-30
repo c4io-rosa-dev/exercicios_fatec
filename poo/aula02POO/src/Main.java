@@ -1,104 +1,74 @@
 package br.com.src;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int op;
 
-        // Paciente
-        Paciente newPaciente = new Paciente();
-        newPaciente.nome = "Caio Rosa";
-        newPaciente.cpf = "123456789-00";
-        newPaciente.telefone = "11999999";
-        newPaciente.genero = "Masculino";
-        newPaciente.idade = 19;
+        do {
+            System.out.println("\n--------------------------");
+            System.out.println("POO 8 - Interfaces");
+            System.out.println("--------------------------\n");
 
-        // Médico (agora herda nome, telefone e senha de Funcionario)
-        Medico doutor = new Medico();
-        doutor.nome = "Cleber";
-        doutor.crm = "666";
-        doutor.telefone = "11999";
-        doutor.especialidade = "Cardiologia";
-        doutor.senha = "123";
+            System.out.println("Escolha uma das opções abaixo:");
+            System.out.println("1) Calcular área do círculo");
+            System.out.println("2) Calcular área do triângulo");
+            System.out.println("3) Calcular área do quadrado");
+            System.out.println("4) Calcular número de arestas do quadrado");
+            System.out.println("5) Calcular área do retângulo");
+            System.out.println("0) Sair");
 
-        // Recepcionista (agora herda nome, telefone e senha de Funcionario)
-        Recepcionista newRecepcionista = new Recepcionista();
-        newRecepcionista.nome = "Claúdia";
-        newRecepcionista.cpf = "123456789-00";
-        newRecepcionista.telefone = "11999";
-        newRecepcionista.senha = "321";
+            op = scanner.nextInt();
 
-        // Agenda
-        Agenda newAgenda = new Agenda();
-        newAgenda.data = LocalDate.of(2026, 2, 22);
-        newAgenda.hora = LocalTime.of(15, 40, 0);
-        newAgenda.medico = doutor;
-        newAgenda.paciente = newPaciente;
+            switch (op) {
+                case 1:
+                    System.out.println("Insira o valor do raio:");
+                    double raio = scanner.nextDouble();
+                    Circulo circulo = new Circulo(raio);
+                    System.out.println("Área do círculo: " + circulo.calculaArea());
+                    break;
 
-        // Consulta
-        Consulta newConsulta = new Consulta();
-        newConsulta.data = LocalDate.of(2026, 2, 22);
-        newConsulta.hora = LocalTime.of(15, 40, 0);
-        newConsulta.medico = doutor;
-        newConsulta.paciente = newPaciente;
-        newConsulta.motivo = "rotina";
-        newConsulta.historico = "Novo histórico";
+                case 2:
+                    System.out.println("Insira a base do triângulo:");
+                    double baseT = scanner.nextDouble();
+                    System.out.println("Insira a altura do triângulo:");
+                    double alturaT = scanner.nextDouble();
+                    Triangulo triangulo = new Triangulo(baseT, alturaT);
+                    System.out.println("Área do triângulo: " + triangulo.calculaArea());
+                    break;
 
-        // Receita (agora herda data e descritivo de Procedimento)
-        Receita newReceita = new Receita();
-        newReceita.consulta = newConsulta;
-        newReceita.data = LocalDate.of(2026, 02, 22);
-        newReceita.descritivo = "Receita para remédio X";
+                case 3:
+                    System.out.println("Insira o lado do quadrado:");
+                    double lado = scanner.nextDouble();
+                    Quadrado quadrado = new Quadrado(lado);
+                    System.out.println("Área do quadrado: " + quadrado.calculaArea());
+                    break;
 
-        // Exame (agora herda data e descritivo de Procedimento)
-        Exame newExame = new Exame();
-        newExame.consulta = newConsulta;
-        newExame.data = LocalDate.of(2026, 02, 22);
-        newExame.descritivo = "Exame cardiológico";
+                case 4:
+                    Quadrado q = new Quadrado(0);
+                    System.out.println("Número de arestas do quadrado: " + q.quantidadeArestas());
+                    break;
 
-        System.out.println("========== DADOS ==========");
-        System.out.println("\n--- Paciente ---");
-        newPaciente.mostrar();
-        System.out.println("\n--- Médico ---");
-        doutor.mostrar();
-        System.out.println("\n--- Recepcionista ---");
-        newRecepcionista.mostrar();
-        System.out.println("\n--- Agenda ---");
-        newAgenda.mostrar();
-        System.out.println("\n--- Consulta ---");
-        newConsulta.mostrar();
-        System.out.println("\n--- Receita ---");
-        newReceita.mostrar();
-        System.out.println("\n--- Exame ---");
-        newExame.mostrar();
+                case 5:
+                    System.out.println("Insira a base do retângulo:");
+                    double baseR = scanner.nextDouble();
+                    System.out.println("Insira a altura do retângulo:");
+                    double alturaR = scanner.nextDouble();
+                    Retangulo retangulo = new Retangulo(baseR, alturaR);
+                    System.out.println("Área do retângulo: " + retangulo.calculaArea());
+                    break;
 
-        // ========== DEMONSTRAÇÃO DE HERANÇA ==========
-        System.out.println("\n========== HERANÇA: Funcionario ==========");
-        System.out.println("Medico é Funcionario? " + (doutor instanceof Funcionario));
-        System.out.println("Recepcionista é Funcionario? " + (newRecepcionista instanceof Funcionario));
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
 
-        // Polimorfismo: tratar ambos como Funcionario
-        Funcionario func1 = doutor;
-        Funcionario func2 = newRecepcionista;
-        System.out.println("\nAcessando via referência Funcionario:");
-        func1.acessar();
-        func2.acessar();
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        } while (op != 0);
 
-        System.out.println("\n========== HERANÇA: Procedimento ==========");
-        System.out.println("Receita é Procedimento? " + (newReceita instanceof Procedimento));
-        System.out.println("Exame é Procedimento? " + (newExame instanceof Procedimento));
-
-        // Polimorfismo: tratar ambos como Procedimento
-        Procedimento proc1 = newReceita;
-        Procedimento proc2 = newExame;
-        System.out.println("\nConsultando via referência Procedimento:");
-        proc1.consultar();
-        proc2.consultar();
-
-        // Métodos específicos das subclasses
-        System.out.println("\nMétodos específicos:");
-        newReceita.preescrever();
-        newExame.solicitar();
+        scanner.close();
     }
 }
