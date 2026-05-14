@@ -1,4 +1,4 @@
-package br.com.src;
+package formas;
 
 public class Retangulo implements FormasGeometricas {
     private double base;

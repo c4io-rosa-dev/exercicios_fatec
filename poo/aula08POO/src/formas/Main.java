@@ -1,4 +1,4 @@
-package br.com.src;
+package formas;
 
 import java.util.Scanner;
 

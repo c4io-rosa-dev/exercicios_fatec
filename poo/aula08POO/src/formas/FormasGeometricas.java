@@ -1,4 +1,4 @@
-package br.com.src;
+package formas;
 
 public interface FormasGeometricas {
     int quantidadeArestas();
