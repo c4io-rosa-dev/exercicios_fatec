@@ -1,7 +1,6 @@
 package clinica;
 
 public class Recepcionista extends Funcionario {
-    // Atributo específico (nome, telefone e senha são herdados de Funcionario)
     public String cpf;
 
     public Recepcionista() {
@@ -29,8 +28,6 @@ public class Recepcionista extends Funcionario {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
-    // acessar() é herdado de Funcionario
 
     @Override
     void mostrar() {

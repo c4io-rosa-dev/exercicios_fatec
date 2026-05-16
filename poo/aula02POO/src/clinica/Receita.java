@@ -3,7 +3,6 @@ package clinica;
 import java.time.LocalDate;
 
 public class Receita extends Procedimento {
-    // Atributo específico (data e descritivo são herdados de Procedimento)
     public Consulta consulta;
 
     public Receita() {
@@ -31,8 +30,6 @@ public class Receita extends Procedimento {
     public void setConsulta(Consulta consulta) {
         this.consulta = consulta;
     }
-
-    // consultar() é herdado de Procedimento
 
     public void preescrever() {
         System.out.println("Receita prescrita em " + data + ": " + descritivo);

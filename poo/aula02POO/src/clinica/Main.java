@@ -1,104 +1,65 @@
 package clinica;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        // Paciente
-        Paciente newPaciente = new Paciente();
-        newPaciente.nome = "Caio Rosa";
-        newPaciente.cpf = "123456789-00";
-        newPaciente.telefone = "11999999";
-        newPaciente.genero = "Masculino";
-        newPaciente.idade = 19;
+        DAO dao = new DAO();
 
-        // Médico (agora herda nome, telefone e senha de Funcionario)
-        Medico doutor = new Medico();
-        doutor.nome = "Cleber";
-        doutor.crm = "666";
-        doutor.telefone = "11999";
-        doutor.especialidade = "Cardiologia";
-        doutor.senha = "123";
+        System.out.println("========== CRUD MÉDICO ==========");
 
-        // Recepcionista (agora herda nome, telefone e senha de Funcionario)
-        Recepcionista newRecepcionista = new Recepcionista();
-        newRecepcionista.nome = "Claúdia";
-        newRecepcionista.cpf = "123456789-00";
-        newRecepcionista.telefone = "11999";
-        newRecepcionista.senha = "321";
+        Medico medico = new Medico("Dr. Cleber", "666", "11999", "Cardiologia", "123");
+        dao.inserirMedico(medico);
 
-        // Agenda
-        Agenda newAgenda = new Agenda();
-        newAgenda.data = LocalDate.of(2026, 2, 22);
-        newAgenda.hora = LocalTime.of(15, 40, 0);
-        newAgenda.medico = doutor;
-        newAgenda.paciente = newPaciente;
+        System.out.println("\n--- Lista de Médicos ---");
+        List<Medico> medicos = dao.listarMedicos();
+        for (Medico m : medicos) {
+            m.mostrar();
+            System.out.println("---");
+        }
 
-        // Consulta
-        Consulta newConsulta = new Consulta();
-        newConsulta.data = LocalDate.of(2026, 2, 22);
-        newConsulta.hora = LocalTime.of(15, 40, 0);
-        newConsulta.medico = doutor;
-        newConsulta.paciente = newPaciente;
-        newConsulta.motivo = "rotina";
-        newConsulta.historico = "Novo histórico";
+        System.out.println("\n--- Buscar médico CRM 666 ---");
+        Medico encontrado = dao.buscarMedico("666");
+        if (encontrado != null) {
+            encontrado.mostrar();
+        }
 
-        // Receita (agora herda data e descritivo de Procedimento)
-        Receita newReceita = new Receita();
-        newReceita.consulta = newConsulta;
-        newReceita.data = LocalDate.of(2026, 02, 22);
-        newReceita.descritivo = "Receita para remédio X";
+        System.out.println("\n--- Atualizando médico ---");
+        if (encontrado != null) {
+            encontrado.setEspecialidade("Neurologia");
+            encontrado.setTelefone("11988887777");
+            dao.atualizarMedico(encontrado);
+        }
 
-        // Exame (agora herda data e descritivo de Procedimento)
-        Exame newExame = new Exame();
-        newExame.consulta = newConsulta;
-        newExame.data = LocalDate.of(2026, 02, 22);
-        newExame.descritivo = "Exame cardiológico";
+        System.out.println("\n--- Excluindo médico CRM 666 ---");
+        dao.excluirMedico("666");
 
-        System.out.println("========== DADOS ==========");
-        System.out.println("\n--- Paciente ---");
-        newPaciente.mostrar();
-        System.out.println("\n--- Médico ---");
-        doutor.mostrar();
-        System.out.println("\n--- Recepcionista ---");
-        newRecepcionista.mostrar();
-        System.out.println("\n--- Agenda ---");
-        newAgenda.mostrar();
-        System.out.println("\n--- Consulta ---");
-        newConsulta.mostrar();
-        System.out.println("\n--- Receita ---");
-        newReceita.mostrar();
-        System.out.println("\n--- Exame ---");
-        newExame.mostrar();
+        System.out.println("\n========== CRUD RECEPCIONISTA ==========");
 
-        // ========== DEMONSTRAÇÃO DE HERANÇA ==========
-        System.out.println("\n========== HERANÇA: Funcionario ==========");
-        System.out.println("Medico é Funcionario? " + (doutor instanceof Funcionario));
-        System.out.println("Recepcionista é Funcionario? " + (newRecepcionista instanceof Funcionario));
+        Recepcionista recep = new Recepcionista("Claúdia", "123456789-00", "11999", "321");
+        dao.inserirRecepcionista(recep);
 
-        // Polimorfismo: tratar ambos como Funcionario
-        Funcionario func1 = doutor;
-        Funcionario func2 = newRecepcionista;
-        System.out.println("\nAcessando via referência Funcionario:");
-        func1.acessar();
-        func2.acessar();
+        System.out.println("\n--- Lista de Recepcionistas ---");
+        List<Recepcionista> recepcionistas = dao.listarRecepcionistas();
+        for (Recepcionista r : recepcionistas) {
+            r.mostrar();
+            System.out.println("---");
+        }
 
-        System.out.println("\n========== HERANÇA: Procedimento ==========");
-        System.out.println("Receita é Procedimento? " + (newReceita instanceof Procedimento));
-        System.out.println("Exame é Procedimento? " + (newExame instanceof Procedimento));
+        System.out.println("\n--- Buscar recepcionista CPF 123456789-00 ---");
+        Recepcionista recepEncontrado = dao.buscarRecepcionista("123456789-00");
+        if (recepEncontrado != null) {
+            recepEncontrado.mostrar();
+        }
 
-        // Polimorfismo: tratar ambos como Procedimento
-        Procedimento proc1 = newReceita;
-        Procedimento proc2 = newExame;
-        System.out.println("\nConsultando via referência Procedimento:");
-        proc1.consultar();
-        proc2.consultar();
+        System.out.println("\n--- Atualizando recepcionista ---");
+        if (recepEncontrado != null) {
+            recepEncontrado.setTelefone("11977776666");
+            dao.atualizarRecepcionista(recepEncontrado);
+        }
 
-        // Métodos específicos das subclasses
-        System.out.println("\nMétodos específicos:");
-        newReceita.preescrever();
-        newExame.solicitar();
+        System.out.println("\n--- Excluindo recepcionista CPF 123456789-00 ---");
+        dao.excluirRecepcionista("123456789-00");
     }
 }

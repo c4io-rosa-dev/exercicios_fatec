@@ -1,7 +1,6 @@
 package clinica;
 
 public class Medico extends Funcionario {
-    // Atributos específicos (nome, telefone e senha são herdados de Funcionario)
     public String crm;
     public String especialidade;
 
@@ -41,8 +40,6 @@ public class Medico extends Funcionario {
     public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
     }
-
-    // acessar() é herdado de Funcionario
 
     @Override
     void mostrar() {
